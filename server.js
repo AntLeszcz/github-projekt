@@ -58,10 +58,10 @@ app.get("/editCar", function (req, res) {
 app.get("/updateCar", function (req, res) {
     let context = { pojazdy: [] }
     let obj = {
-        ubezpieczony: req.query.ubezpieczony == "Tak" ? "Tak" : "Nie",
-        benzyna: req.query.benzyna == "Tak" ? "Tak" : "Nie",
-        uszkodzony: req.query.uszkodzony == "Tak" ? "Tak" : "Nie",
-        naped4x4: req.query.naped4x4 == "Tak" ? "Tak" : "Nie"
+        ubezpieczony: req.query.ubezpieczony == "Tak" ? "Tak" : req.query.ubezpieczony == "Nie" ? "Nie" : "Brak danych",
+        benzyna: req.query.benzyna == "Tak" ? "Tak" : req.query.benzyna == "Nie" ? "Nie" : "Brak danych",
+        uszkodzony: req.query.uszkodzony == "Tak" ? "Tak" : req.query.uszkodzony == "Nie" ? "Nie" : "Brak danych",
+        naped4x4: req.query.naped4x4 == "Tak" ? "Tak" : req.query.naped4x4 == "Nie" ? "Nie" : "Brak danych"
     }
     pojazdy.update({ _id: req.query.id }, { $set: obj }, {}, function (err, numUpdated) {
         pojazdy.find({}, function (err, docs) {
